@@ -10,32 +10,40 @@ import java.util.List;
 
 import javax.xml.crypto.Data;
 
-import org.apache.commons.dbutils.QueryRunner;
 import org.junit.Test;
 
 import com.situ.student.dao.IStudentDao;
 import com.situ.student.entity.Banji;
 import com.situ.student.entity.Student;
-import com.situ.student.util.C3P0Util;
 import com.situ.student.util.JDBCUtil;
 import com.situ.student.vo.StudentSearchCondition;
 import com.sun.org.apache.xml.internal.resolver.helpers.PublicId;
 
-public class StudentDaoImpl implements IStudentDao{
-	private QueryRunner queryRunner = new QueryRunner(C3P0Util.getDataSource());
+public class StudentDaoImpl2 implements IStudentDao{
 
 	@Override
 	public int add(Student student) {
-		int count =0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String sql = "INSERT INTO student(NAME,age,gender,address) VALUES(?,?,?,?);";
 		try {
-		    String sql = "INSERT INTO student(NAME,age,gender,address) VALUES(?,?,?,?);";
-		    Object[] params = {student.getName(),student.getAge(),student.getGender(),student.getAddress()};
-		
-			count = queryRunner.update(sql,params);
+			connection = JDBCUtil.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, student.getName());
+			preparedStatement.setInt(2, student.getAge());
+			preparedStatement.setString(3, student.getGender());
+			preparedStatement.setString(4, student.getAddress());
+//			preparedStatement.setDate(5, new java.sql.Date(student.getBirthday().getTime()));
+//			preparedStatement.setDate(6, new java.sql.Date(student.getAddTime().getTime()));
+			
+			int result = preparedStatement.executeUpdate();
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(connection, preparedStatement);
 		}
-		return count;
+		return 0;
 	}
 
 	@Override

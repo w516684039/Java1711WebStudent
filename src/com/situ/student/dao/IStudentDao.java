@@ -4,6 +4,7 @@ package com.situ.student.dao;
 import java.util.List;
 
 import com.situ.student.entity.Student;
+import com.situ.student.vo.StudentSearchCondition;
 /**
  * student操作的dao 
  */
@@ -34,4 +35,16 @@ public interface IStudentDao {
 	public abstract List<Student> showStudentAndBanjiInfo();
 	
 	public abstract int deleteById(int id);
+
+	public abstract List<Student> searchByCondition(StudentSearchCondition studentSearchCondition);
+    
+	
+	public abstract List<Student> findPageBeanList(int offset, int pageSize);
+
+	public abstract int getTotalCount();
+
+
+	public abstract int getTotalCount(StudentSearchCondition studentSearchCondition);
+
+	public abstract List<Student> findPageBeanList(StudentSearchCondition studentSearchCondition);
 }
