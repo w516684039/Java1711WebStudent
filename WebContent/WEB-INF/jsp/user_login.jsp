@@ -9,16 +9,18 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-    <form action="${ctx}/student?method=add" method="post">
+    <div class="col-md-2">
+	<form action="${ctx}/login?method=login" method="post">
 						<div class="form-group">
 							<label for="exampleInputEmail1">用户名</label>
-							<input type="text" class="form-control" id="exampleInputName1" placeholder="name" name="name">
+							<input type="text" class="form-control" id="exampleInputName1" placeholder="用户名" name="name">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">密码</label>
-							<input type="text" class="form-control" id="exampleInputAge1" placeholder="age" name="password">
+							<input type="age" class="form-control" id="exampleInputAge1" placeholder="密码" name="password">
 						</div>
-						<button type="submit" class="btn btn-primary" >Submit</button>
+						<input type="submit" value="登录"/>
 					</form>
+  </div>
 </body>
 </html>

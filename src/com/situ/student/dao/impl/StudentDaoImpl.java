@@ -61,7 +61,18 @@ public class StudentDaoImpl implements IStudentDao{
 
 	@Override
 	public int update(Student student) {
-		Connection connection = null;
+		int count = 0;
+		try {
+			String sql = "UPDATE student SET name=?,age=?,gender=?,address=? WHERE id=?;";
+			Object[] params = { student.getName(), student.getAge(), student.getGender(), student.getAddress(),
+					student.getId()};
+			count = queryRunner.update(sql, params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return count;
+		/*Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int count = 0;
 		String sql = "UPDATE student SET name=?,age=?,gender=?,address=? WHERE id=?;";
@@ -81,7 +92,7 @@ public class StudentDaoImpl implements IStudentDao{
 			JDBCUtil.close(connection, preparedStatement);
 		}
 
-		return count;
+		return count;*/
 	}
 
 	@Override

@@ -49,10 +49,14 @@
 						<li>
 							<a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
 						</li>
+						<li>
+							<a href="${ctx}/user?method=getOnLinePage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;在线列表</a>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出</a>
+							<a href="${ctx}/login?method=logout"><span>用户名：${user.name}</span>&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出</a>
+						    
 						</li>
 					</ul>
 				</div>
@@ -139,12 +143,20 @@
 						    	<li class="active"><a href="javascript:void(0)">${page}</a></li>
 						    </c:if>
 					    </c:forEach>
-					    
+					    <c:if test="${pageBean.pageNo!=pageBean.totalPage}">
 					    <li>
-					      <a href="#" aria-label="Next">
+					      <a href="javascript:goPage('${pageBean.pageNo+1}')" aria-label="Previous">
 					        <span aria-hidden="true">&raquo;</span>
 					      </a>
 					    </li>
+					   </c:if>
+					   	<c:if test="${pageBean.pageNo==pageBean.totalPage}">
+						    <li class="disabled">
+						      <a href="javascript:void(0)" aria-label="Previous">
+						        <span aria-hidden="true">&raquo;</span>
+						      </a>
+						    </li>
+					  	</c:if>
 					  </ul>
 					</nav>   
 				  </div>

@@ -1,31 +1,54 @@
 package com.situ.student.controller;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import com.situ.student.entity.User;
+import com.situ.student.service.IUserService;
+import com.situ.student.service.impl.UserServiceImpl;
+
+public class LoginServlet extends BaseServlet {
+
+	private IUserService userService = new UserServiceImpl();
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String name = req.getParameter("name");
-		String password = req.getParameter("password");
-		if ("zhangsan".equals(name)&&"123".equals(password)) {
-			HttpSession session = req.getSession();
-			session.setAttribute("userName", name);
-			resp.sendRedirect(req.getContextPath() + "/fingAll.do");
+	public void getLoginPage(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		request.getRequestDispatcher("/WEB-INF/jsp/user_login.jsp").forward(request, response);
+	}
+    
+	public void login(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		User user = userService.login(name,password);
+		if (user!=null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			
+            List<User> list = (List<User>) getServletContext().getAttribute("onLineUserList");
+			list.add(user);
+            
+			response.sendRedirect(request.getContextPath() + "/student?method=pageList");
+			return;
+			
 		}else {
-			resp.sendRedirect(req.getContextPath() + "/jsp/fail.jsp");
+			response.sendRedirect(request.getContextPath() + "/user?method=getLoginPage");
 		}
 	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doGet(req, resp);
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		session.removeAttribute("user");
+		
+        List<User> list = (List<User>) getServletContext().getAttribute("onLineUserList");
+        list.remove(user);
+		
+		response.sendRedirect(request.getContextPath() + "/login?method=getLoginPage");
 	}
 
 }
