@@ -148,21 +148,15 @@ public class StudentMainServlet extends BaseServlet {
 		// 1.接收参数
 				req.setCharacterEncoding("utf-8");
 				String name = req.getParameter("name");
-				System.out.println("name:" + name);
-//				byte[] bytes = name.getBytes("iso8859-1");
-//				String newName = new String(bytes, "utf-8");
-//				System.out.println("newName: " + newName);
 				String age = req.getParameter("age");
 				String gender = req.getParameter("gender");
 				String address = req.getParameter("address");
 				String banjiId = req.getParameter("banjiId");
-				System.out.println(banjiId);
-				Banji banji = new Banji();
-				banji.setId(Integer.parseInt(banjiId));
-//				Student student = new Student(name, Integer.parseInt(age), gender, address, new Date(), new Date());
-				Student student = new Student(name, Integer.parseInt(age), gender, address);
-				student.setBanji(banji);
-				System.out.println(student);
+				
+			
+				
+				Student student = new Student(name, Integer.parseInt(age), gender, address,banjiId);
+				
 				// 2.业务处理
 				System.out.println("影像的行数：0");
 				int result = studentService.add(student);

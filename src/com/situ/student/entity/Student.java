@@ -12,13 +12,23 @@ public class Student implements Serializable {
 	private String address;
 	private Date birthday;
 	private Date addTime;// 入学时间，当前生成学生对象时间
-	private Banji banji;
+	private String banji_id;
 
 	public Student() {
 		super();
 	}
 	
 	
+	public Student(String name, Integer age, String gender, String address, String banji) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+		this.banji_id = banji;
+	}
+
+
 	public Student(String name, Integer age, String gender, String address) {
 		super();
 		this.name = name;
@@ -30,7 +40,7 @@ public class Student implements Serializable {
 
 	
 
-	public Student(String name, Integer age, String gender, String address, Date birthday, Date addTime, Banji banji) {
+	public Student(String name, Integer age, String gender, String address, Date birthday, Date addTime, String banji) {
 		super();
 		this.name = name;
 		this.age = age;
@@ -38,11 +48,11 @@ public class Student implements Serializable {
 		this.address = address;
 		this.birthday = birthday;
 		this.addTime = addTime;
-		this.banji = banji;
+		this.banji_id = banji;
 	}
 
 	public Student(Integer id, String name, Integer age, String gender, String address, Date birthday, Date addTime,
-			Banji banji) {
+			String banji) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -51,7 +61,7 @@ public class Student implements Serializable {
 		this.address = address;
 		this.birthday = birthday;
 		this.addTime = addTime;
-		this.banji = banji;
+		this.banji_id = banji;
 	}
 
 
@@ -81,12 +91,12 @@ public class Student implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Banji getBanji() {
-		return banji;
+	public String getBanji() {
+		return banji_id;
 	}
 
-	public void setBanji(Banji banji) {
-		this.banji = banji;
+	public void setBanji(String banji) {
+		this.banji_id = banji;
 	}
 
 	public Date getAddTime() {
@@ -159,7 +169,7 @@ public class Student implements Serializable {
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", address=" + address
-				+ ", birthday=" + birthday + ", addTime=" + addTime + ", banji=" + banji + "]";
+				+ ", birthday=" + birthday + ", addTime=" + addTime + ", banji=" + banji_id + "]";
 	}
 
 
