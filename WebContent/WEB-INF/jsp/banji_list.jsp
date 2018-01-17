@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@include file="../common/base.jsp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -23,21 +26,25 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li >
-							<a href="student_list.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
+							<a href="${ctx }/student?method=pageList"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
 						</li>
 						<li class="active">
-							<a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
+							<a href="${ctx}/banji?method=findAllBanji"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
+							<a href="${ctx}/course?method=findAllCourse"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
+							<a href="${ctx}/manager?method=getManagerPage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
+						</li>
+						<li>
+							<a href="${ctx}/user?method=getOnLinePage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;在线列表</a>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出</a>
+							<a href="${ctx}/login?method=logout"><span>用户名：${user.name}</span>&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出</a>
+						    
 						</li>
 					</ul>
 				</div>
@@ -52,7 +59,7 @@
 						<a href="#" class="list-group-item active">
 							班级列表
 						</a>
-						<a href="banji_add.html" class="list-group-item">
+						<a href="${ctx}/banji?method=getBanjiAdd" class="list-group-item">
 							班级添加
 						</a>
 					</div>
@@ -63,31 +70,19 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Username</th>
+									<th>ID</th>
+									<th>班级</th>
+									<th>删除</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
+							    <c:forEach items="${banjiList}" var="banji">
+							    <tr>
+									<td>${banji.id}</td>
+									<td>${banji.name}</td>
+									<td><a href="${ctx}/banji?method=delete&id=${banji.id}">删除</a></td>
 								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>Larry</td>
-									<td>the Bird</td>
-									<td>@twitter</td>
-								</tr>
+							    </c:forEach>
 							</tbody>
 						</table>
 					</div>

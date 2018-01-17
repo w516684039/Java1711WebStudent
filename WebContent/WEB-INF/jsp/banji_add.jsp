@@ -27,17 +27,20 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						<li >
+							<a href="${ctx }/student?method=pageList"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
+						</li>
 						<li class="active">
-							<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
+							<a href="${ctx}/banji?method=findAllBanji"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
 						</li>
 						<li>
-							<a href="banji_list.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
+							<a href="${ctx}/course?method=findAllCourse"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
+							<a href="${ctx}/manager?method=getManagerPage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
+							<a href="${ctx}/user?method=getOnLinePage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;在线列表</a>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -54,32 +57,20 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="list-group">
-						<a href="${ctx}/student?method=pageList" class="list-group-item">
-							学生列表
+						<a href="${ctx}/banji?method=findAllBanji" class="list-group-item">
+							课程列表
 						</a>
 						<a href="#" class="list-group-item active">
-							学生添加
+							课程添加
 						</a>
 					</div>
 				</div>
 
 				<div class="col-md-10">
-					<form action="${ctx}/student?method=add" method="post">
+					<form action="${ctx}/banji?method=addBanji" method="post">
 						<div class="form-group">
-							<label for="exampleInputEmail1">姓名</label>
-							<input type="name" class="form-control" id="exampleInputName1" placeholder="name" name="name">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">年龄</label>
-							<input type="age" class="form-control" id="exampleInputAge1" placeholder="age" name="age">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">性别</label>
-							<input type="gender" class="form-control" id="exampleInputGender1" placeholder="gender" name="gender">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">住址</label>
-							<input type="adress" class="form-control" id="exampleInputAdress1" placeholder="address" name="address">
+							<label for="exampleInputEmail1">课程名字</label>
+							<input type="name" class="form-control" id="exampleInputName1" placeholder="班级名字" name="name">
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>

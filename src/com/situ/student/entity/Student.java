@@ -28,14 +28,7 @@ public class Student implements Serializable {
 	}
 
 
-	public Student(Integer id, String name, Integer age, String gender, String address) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.gender = gender;
-		this.address = address;
-	}
+	
 
 	public Student(String name, Integer age, String gender, String address, Date birthday, Date addTime, Banji banji) {
 		super();
@@ -151,11 +144,25 @@ public class Student implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+
+	public Student(Integer id, String name, Integer age, String gender, String address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.address = address;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", address=" + address
 				+ ", birthday=" + birthday + ", addTime=" + addTime + ", banji=" + banji + "]";
 	}
+
+
+	
 
 }

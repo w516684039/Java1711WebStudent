@@ -33,5 +33,9 @@ public interface IStudentService {
     PageBean searchByCondition(StudentSearchCondition studentSearchCondition);
 
 	PageBean getPageBean(int pageNo, int pageSize);
+	
+	boolean checkName(String name);
+	
+	boolean deleteAll(String[] ids);
 
 }

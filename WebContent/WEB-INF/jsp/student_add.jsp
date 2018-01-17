@@ -27,17 +27,20 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active">
-							<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
+						<li class="active" >
+							<a href="${ctx }/student?method=pageList"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
 						</li>
 						<li>
-							<a href="banji_list.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
+							<a href="${ctx}/banji?method=findAllBanji"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
+							<a href="${ctx}/course?method=findAllCourse"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
+							<a href="${ctx}/manager?method=getManagerPage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
+						</li>
+						<li>
+							<a href="${ctx}/user?method=getOnLinePage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;在线列表</a>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -54,7 +57,7 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="list-group">
-						<a href="${ctx}/student?method=findAll" class="list-group-item">
+						<a href="${ctx}/student?method=pageList" class="list-group-item">
 							学生列表
 						</a>
 						<a href="#" class="list-group-item active">
@@ -81,6 +84,11 @@
 							<label for="exampleInputEmail1">住址</label>
 							<input type="adress" class="form-control" id="exampleInputAdress1" placeholder="address" name="address">
 						</div>
+						<select name="banjiId">
+						    <c:forEach items="${list}" var="banji">
+						        <option value="${banji.id}">${banji.name}</option>
+						    </c:forEach><br/>
+						</select>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 

@@ -3,12 +3,11 @@
 <%@include file="../common/base.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css"/>
 	</head>
-
 	<body>
 		<nav class="navbar navbar-default">
 			<div class="container">
@@ -32,13 +31,13 @@
 						<li>
 							<a href="${ctx}/banji?method=findAllBanji"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="${ctx}/course?method=findAllCourse"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
 						</li>
 						<li>
 							<a href="${ctx}/manager?method=getManagerPage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="${ctx}/user?method=getOnLinePage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;在线列表</a>
 						</li>
 					</ul>
@@ -56,7 +55,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-2">
-					
+					<div class="list-group">
+						<a href="#" class="list-group-item active">
+							课程列表
+						</a>
+						<a href="${ctx}/course?method=getCourseAdd" class="list-group-item">
+							课程添加
+						</a>
+					</div>
 				</div>
 
 				<div class="col-md-10">
@@ -65,30 +71,24 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>用户名</th>
-									<th>密码</th>
-									
+									<th>课程</th>
+									<th>删除</th>
 								</tr>
 							</thead>
 							<tbody>
-							    <c:forEach items="${onLineUserList}" var="user">
+							    <c:forEach items="${courseList}" var="course">
 							    <tr>
-									<td>${user.id}</td>
-									<td>${user.name}</td>
-									<td>${user.password}</td>
-								
-								
+									<td>${course.id}</td>
+									<td>${course.name}</td>
+									<td><a href="${ctx}/course?method=delete&id=${course.id}">删除</a></td>
 								</tr>
 							    </c:forEach>
 							</tbody>
 						</table>
-						     
-				  </div>
+					</div>
 
 				</div>
 			</div>
 		</div>
-
 	</body>
-
 </html>

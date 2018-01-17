@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserMainServlet extends BaseServlet {
 	public void getOnLinePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("UserMainServlet.getOnLinePage()");
 		request.getRequestDispatcher("/WEB-INF/jsp/online_user_list.jsp").forward(request, response);
 	}
 }

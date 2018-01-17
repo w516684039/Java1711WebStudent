@@ -56,7 +56,9 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Override
 	public boolean update(Student student) {
-		// TODO Auto-generated method stub
+        if (studentDao.update(student)>0) {
+			return true;
+		}
 		return false;
 	}
 
@@ -140,6 +142,16 @@ public class StudentServiceImpl implements IStudentService {
 		pageBean.setList(list);
 		
 		return pageBean;
+	}
+
+	@Override
+	public boolean checkName(String name) {
+		return studentDao.checkName(name);
+	}
+
+	@Override
+	public boolean deleteAll(String[] ids) {
+		return studentDao.deleteAll(ids);
 	}
 
 }

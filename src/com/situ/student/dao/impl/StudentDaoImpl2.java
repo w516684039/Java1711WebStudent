@@ -527,6 +527,12 @@ public class StudentDaoImpl2 implements IStudentDao{
 		}
 		return list;
 	}
+
+	@Override
+	public boolean deleteAll(String[] ids) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	

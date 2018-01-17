@@ -16,6 +16,16 @@
 				$("#pageNo").val(pageNo);	
 				$("#searchForm").submit();
 			}
+			function selectAll(){
+				$("input[name=selectIds]").prop("checked", $("#selectAlls").is(":checked"));
+			}
+			function deleteAll() {
+				var isConfirmDelete = confirm("确认要删除么？");
+				if (isConfirmDelete) {
+					$("#mainForm").attr("action", "${ctx}/student?method=deleteAll");
+					$("#mainForm").submit();
+				}
+			}
 
 		</script>
 	</head>
@@ -37,17 +47,17 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active">
-							<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
+						<li class="active" >
+							<a href="${ctx }/student?method=pageList"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
 						</li>
 						<li>
-							<a href="banji_list.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
+							<a href="${ctx}/banji?method=findAllBanji"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
+							<a href="${ctx}/course?method=findAllCourse"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
 						</li>
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
+							<a href="${ctx}/manager?method=getManagerPage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;教务管理</a>
 						</li>
 						<li>
 							<a href="${ctx}/user?method=getOnLinePage"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>&nbsp;&nbsp;在线列表</a>
@@ -89,10 +99,15 @@
 				              </select>
 				         <input type="submit" value="搜索"/>
 				    </form>
+				    <button class="btn btn-primary" onclick="deleteAll()">批量删除</button>
 					<div class="bs-example" data-example-id="hoverable-table">
+						<form action="" id="mainForm" method="post">
 						<table class="table table-hover">
 							<thead>
 								<tr>
+								    <th>
+						                <input type="checkbox" id="selectAlls" onclick="selectAll()"/>
+						            </th>
 									<th>ID</th>
 									<th>姓名</th>
 									<th>年龄</th>
@@ -105,6 +120,9 @@
 							<tbody>
 							    <c:forEach items="${pageBean.list}" var="student">
 							    <tr>
+							        <td>
+						          	    <input type="checkbox" name="selectIds" value="${student.id}"/>
+						            </td>
 									<td>${student.id}</td>
 									<td>${student.name}</td>
 									<td>${student.age}</td>

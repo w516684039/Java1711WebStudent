@@ -31,7 +31,30 @@ public class LoginFilter implements Filter {
 		
 		System.out.println(uri);
 		String servletPath = req.getServletPath();
-		if (!"/login".equalsIgnoreCase(servletPath)) {
+		int lastIndex = servletPath.lastIndexOf(".");
+		String extension = "";
+		//下面新方法
+		if (lastIndex != -1) {
+			extension = servletPath.substring(lastIndex);
+		}
+		if("/login".equals(servletPath)
+				||".js".equalsIgnoreCase(extension)
+				|| ".css".equalsIgnoreCase(extension)
+				|| "/checkImg".equalsIgnoreCase(servletPath)){
+			chain.doFilter(request, response);
+		}else{
+			HttpSession session = req.getSession();
+			User user = (User) session.getAttribute("user");
+			if (user == null) {//沒有登录成功
+				resp.sendRedirect(req.getContextPath() + "/login?method=getLoginPage");
+				return;
+			}
+			chain.doFilter(request, response);
+			
+		}
+	}
+		
+		/*if (!"/login".equalsIgnoreCase(servletPath)) {
 			HttpSession session = req.getSession();
 			User user = (User) session.getAttribute("user");
 			
@@ -42,12 +65,17 @@ public class LoginFilter implements Filter {
 		}
 		
 		chain.doFilter(request, response);
-	}
+	}*/
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 		
+	}
+	public static void main(String[] args) {
+		String path = "/Java1711WebStudent/lib/jquery/jquery-1.11.1.js";
+		String extension = path.substring(path.lastIndexOf(".") + 1);
+		System.out.println(extension);
 	}
 
 }

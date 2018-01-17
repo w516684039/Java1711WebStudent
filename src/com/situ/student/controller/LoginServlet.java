@@ -23,6 +23,16 @@ public class LoginServlet extends BaseServlet {
 	}
     
 	public void login(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String checkCode = request.getParameter("checkCode");
+		String checkCodeSession =(String) request.getSession().getAttribute("checkCodeSession");
+		if (checkCode == null
+				|| "".equals(checkCode)
+				||!checkCode.equalsIgnoreCase(checkCodeSession)) {
+			response.sendRedirect(request.getContextPath()+"/student?method=searchByCondition");
+			return;
+		}
+		
+		
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		User user = userService.login(name,password);
