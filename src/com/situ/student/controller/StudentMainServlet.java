@@ -60,7 +60,7 @@ public class StudentMainServlet extends BaseServlet {
 		Student student = studentService.findById(id);
 		System.out.println(student);
 		req.setAttribute("student", student);
-		req.getRequestDispatcher("/jsp/student_update.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/jsp/student_update.jsp").forward(req, resp);
 	}
 
 	private void delete(HttpServletRequest req, HttpServletResponse resp) throws  IOException{

@@ -128,8 +128,8 @@
 									<td>${student.age}</td>
 									<td>${student.gender}</td>
 									<td>${student.address}</td>
-									<td><a href="${ctx}/student?method=delete&id=${student.id}">删除</a></td>
-					                <td><a href="${ctx}/student?method=toUpdate&id=${student.id}">修改</a></td>
+									<td><a href="${ctx}/student?method=delete&id=${student.id}"><button type="button" class="btn btn-danger">删除</button></a></td>
+					                <td><a href="${ctx}/student?method=toUpdate&id=${student.id}"><button type="button" class="btn btn-info">修改</button></a></td>
 								</tr>
 							    </c:forEach>
 							</tbody>

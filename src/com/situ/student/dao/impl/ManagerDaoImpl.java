@@ -41,6 +41,26 @@ public class ManagerDaoImpl implements IManagerDao {
 	    return list;
 	}
 
+	@Override
+	public int add(String banjiNmae, String courseName) {
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    int num = 0;
+		    try {
+				connection = JDBCUtil.getConnection();
+				String sql = "INSERT INTO banji_course(banji_id,course_id) VALUES(?,?);";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, Integer.parseInt(banjiNmae));
+				preparedStatement.setInt(2, Integer.parseInt(courseName));
+				System.out.println(preparedStatement);
+				 num = preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    return num;
+	}
+
 	/*@Override
 	public List<Map<String, Object>> findAllByJdbc() {
 		String sql = "SELECT s.name  AS s_name,age,b.name AS b_name,c.name AS c_name,c.credit "

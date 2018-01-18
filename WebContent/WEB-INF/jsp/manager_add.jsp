@@ -80,6 +80,7 @@
 				<!-- 右边部分 begin-->
 				<div class="col-md-10">
 				<table class="table table-hover">
+				      
 					      <thead>
 					        <tr>
 					          
@@ -92,25 +93,28 @@
 					      
 					      <tbody>
 					      <tr>
-					      	  	  
+					      	  	  <form action="${ctx}/manager?method=xuanke" method="post">  
 						      <td>
 						          <select name="banjiId">
 						          <c:forEach items="${list}" var="banji">
 						          <option value="${banji.id}">${banji.name}</option>
-						         </c:forEach>
+						          </c:forEach>
 						         </select>
                              </td>
 						      <td>
 						          <select name="courseId">
-						          <c:forEach items="${list}" var="course">
+						          
+						           <c:forEach items="${list1}" var="course">
 						          <option value="${course.id}">${course.name}</option>
 						          </c:forEach>
+						         
 						          </select>
 						      </td>
 						          <td><button type="submit" class="btn btn-primary">Submit</button></td>
-						          
+						           </form>
 						        </tr>
 					      </tbody>
+					     
 					    </table>
 					 
 						

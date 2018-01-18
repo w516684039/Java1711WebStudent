@@ -21,7 +21,7 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">密码</label>
-							<input type="age" class="form-control" id="exampleInputAge1" placeholder="密码" name="password">
+							<input type="password" class="form-control" id="exampleInputAge1" placeholder="密码" name="password">
 						</div>
 						<div class="form-group">
 							验证码：<input type="text" name="checkCode"/>

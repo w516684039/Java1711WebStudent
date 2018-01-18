@@ -7,4 +7,6 @@ public interface IManagerDao {
 	/*List<Map<String, Object>> findAllByDBUtils();*/
 	List<Map<String,Object >> findAll();
 
+	int add(String banjiNmae, String courseName);
+
 }

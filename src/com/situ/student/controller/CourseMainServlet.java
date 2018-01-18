@@ -14,6 +14,8 @@ import com.situ.student.entity.Course;
 public class CourseMainServlet extends BaseServlet {
 	ICourseDao courseDao = new CourseDaoImpl();
 	public void getCourseAdd (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		List<Course> list = new CourseDaoImpl().findAll();
+		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/jsp/course_add.jsp").forward(req, resp);
 	}
 	private void findAllCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
