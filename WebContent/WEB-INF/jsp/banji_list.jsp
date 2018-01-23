@@ -66,6 +66,10 @@
 				</div>
 
 				<div class="col-md-10">
+				    <form action="${ctx }/banji?method=searchByCondition"  method="post">
+				             班级名称：<input type="text" name="name" value="${searchCondition.name}""/>
+				         <input type="submit" value="搜索"/>
+				    </form>
 					<div class="bs-example" data-example-id="hoverable-table">
 						<table class="table table-hover">
 							<thead>
@@ -76,7 +80,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							    <c:forEach items="${banjiList}" var="banji">
+							    <c:forEach items="${list}" var="banji">
 							    <tr>
 									<td>${banji.id}</td>
 									<td>${banji.name}</td>

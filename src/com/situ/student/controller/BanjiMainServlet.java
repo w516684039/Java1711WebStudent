@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.situ.student.dao.IBanjiDao;
 import com.situ.student.dao.impl.BanjiDaoImpl;
 import com.situ.student.entity.Banji;
+import com.situ.student.vo.BnajiSearchCondition;
 
 public class BanjiMainServlet extends BaseServlet {
 	IBanjiDao banjiDao = new BanjiDaoImpl();
@@ -22,7 +24,7 @@ public class BanjiMainServlet extends BaseServlet {
 	private void findAllBanji(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		List<Banji> list = banjiDao.findAll();
-		req.setAttribute("banjiList", list);
+		req.setAttribute("list", list);
 		req.getRequestDispatcher("/WEB-INF/jsp/banji_list.jsp").forward(req, resp);
 	}
 	
@@ -38,5 +40,14 @@ public class BanjiMainServlet extends BaseServlet {
     
     resp.sendRedirect(req.getContextPath()+"/banji?method=findAllBanji");
     System.out.println("到删除这了");
+	}
+	public void searchByCondition(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String name = req.getParameter("name");
+		BnajiSearchCondition banjiSearchCondition = new BnajiSearchCondition(null, null, name);
+	    List<Banji> list = BanjiDaoImpl.searchByCondition(banjiSearchCondition);
+	    System.out.println(list);
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("/WEB-INF/jsp/banji_list.jsp").forward(req, resp);
 	}
 }

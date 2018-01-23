@@ -2,8 +2,11 @@ package com.situ.student.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -12,6 +15,8 @@ import com.situ.student.dao.IBanjiDao;
 import com.situ.student.entity.Banji;
 import com.situ.student.util.C3P0Util;
 import com.situ.student.util.JDBCUtil;
+import com.situ.student.vo.BnajiSearchCondition;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class BanjiDaoImpl implements IBanjiDao {
     private QueryRunner queryRunner = new QueryRunner(C3P0Util.getDataSource());
@@ -57,6 +62,40 @@ public class BanjiDaoImpl implements IBanjiDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return list;
+	}
+
+	public static List<Banji> searchByCondition(BnajiSearchCondition banjiSearchCondition) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		List<String> conditionList = new ArrayList<String>();
+		ResultSet resultSet = null;
+		List<Banji> list = new ArrayList<>();
+		String sql = "SELECT id,NAME FROM banji where Name like ?";
+		conditionList.add("%" + banjiSearchCondition.getName() + "%");
+		try {
+			connection = JDBCUtil.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			for (int i = 0; i < conditionList.size(); i++) {
+				preparedStatement.setObject(i+1, conditionList.get(i));			
+			}
+			System.out.println(preparedStatement);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				int  id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				Banji banji = new Banji(id, name);
+				list.add(banji);
+				System.out.println(banji);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return list;
 	}
 

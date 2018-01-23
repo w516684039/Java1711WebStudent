@@ -19,7 +19,7 @@ public class CourseDaoImpl implements ICourseDao {
 		int count =0;
         try {
             String sql = "INSERT INTO course (NAME) VALUES(?);";
-            Object[] params = {};
+            Object[] params = {course};
        
 			count = queryRunner.update(sql,params);
 		} catch (SQLException e) {

@@ -116,7 +116,7 @@
 					      </tbody>
 					    </table>
 					</form>
-				    <%-- <!-- 分页begin -->
+				         <!-- 分页begin -->
 				    <nav aria-label="Page navigation">
 					  <ul class="pagination">
 					  	<!-- 上一页 begin -->
@@ -153,7 +153,7 @@
 					    </li>
 					  </ul>
 					</nav>
-					<!-- 分页end --> --%>
+					<!-- 分页end --> 
 				</div>
 				<!-- 右边部分 end-->
 			</div>
