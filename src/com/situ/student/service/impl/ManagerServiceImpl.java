@@ -8,6 +8,7 @@ import com.situ.student.dao.impl.ManagerDaoImpl;
 import com.situ.student.entity.Banji;
 import com.situ.student.entity.Course;
 import com.situ.student.service.IManagerService;
+import com.situ.student.vo.ManagerSearchContion;
 
 public class ManagerServiceImpl implements IManagerService {
 	private IManagerDao managerDao = new ManagerDaoImpl();
@@ -39,5 +40,13 @@ public class ManagerServiceImpl implements IManagerService {
 	public int addCourse(String banjiNmae, String courseName) {
 		return managerDao.add(banjiNmae,courseName);
 	}
+
+	@Override
+	public List<Map<String, Object>> searchByCondition(ManagerSearchContion condition) {
+		return managerDao.searchByCondition(condition);
+	}
+
+	
+
 
 }

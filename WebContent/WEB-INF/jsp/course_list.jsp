@@ -66,13 +66,19 @@
 				</div>
 
 				<div class="col-md-10">
+				    <form action="${ctx}/course?method=searchByCondition"  method="post">
+				             课程名称：<input type="text" name="name" value="${searchCondition.name}""/>
+				         <input type="submit" value="搜索"/>
+				    </form>
 					<div class="bs-example" data-example-id="hoverable-table">
 						<table class="table table-hover">
 							<thead>
 								<tr>
 									<th>ID</th>
 									<th>课程</th>
+									<th>学分</th>
 									<th>删除</th>
+									<th>修改</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -80,7 +86,9 @@
 							    <tr>
 									<td>${course.id}</td>
 									<td>${course.name}</td>
+									<td>${course.credit}</td>
 									<td><a href="${ctx}/course?method=delete&id=${course.id}">删除</a></td>
+									<td><a href="${ctx}/course?method=toUpdate&id=${course.id}">修改</a></td>
 								</tr>
 							    </c:forEach>
 							</tbody>

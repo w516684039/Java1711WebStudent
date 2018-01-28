@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.situ.student.dao.IManagerDaoMybatis">
+   <resultMap type="managerSearchCondition" id="managerMap">
+   	<id property=""/>
+   </resultMap>
+  	<select id="searchCondition" parameterType="managerSearchCondition" resultMap="managerMap">
+  		select s.name,s.age,b.name,c.name,credit 
+  		from student as s
+  		inner join banji as b on s.banji_id= b.id
+  		inner join banji_course as bc on bc.banji_id=b.id
+  		inner join course as c on c.id=bc.course_id
+  		<where>
+  			<if test="student.name !=null and student.name !='' ">
+  			and s.name like "%${student.name}%"
+  			</if>
+  			<if test="student.age != null">
+  			and s.age = #{student.age}
+  			</if>
+  			<if test="banji.name">
+  			and b.name = #{banji.name}
+  			</if>
+  			<if test="course.name">
+  			and c.name = #{course.name}
+  			</if>
+  		</where>
+  		
+  	</select>
+  </mapper>

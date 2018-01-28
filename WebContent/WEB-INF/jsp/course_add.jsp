@@ -72,6 +72,8 @@
 						<div class="form-group">
 							<label for="exampleInputEmail1">课程名字</label>
 							<input type="name" class="form-control" id="exampleInputName1" placeholder="课程名字" name="name">
+						    <!-- <label for="exampleInputEmail1">学分</label>
+							<input type="credit" class="form-control" id="exampleInputName1" placeholder="学分" name="name"> -->
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</form>

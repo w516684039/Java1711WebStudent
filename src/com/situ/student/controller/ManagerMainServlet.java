@@ -7,13 +7,14 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.situ.student.dao.impl.BanjiDaoImpl;
 import com.situ.student.dao.impl.CourseDaoImpl;
+import com.situ.student.dao.impl.ManagerDaoImpl;
 import com.situ.student.entity.Banji;
 import com.situ.student.entity.Course;
 import com.situ.student.service.IManagerService;
 import com.situ.student.service.impl.ManagerServiceImpl;
+import com.situ.student.vo.ManagerSearchContion;
 
 public class ManagerMainServlet extends BaseServlet {
 	private IManagerService managerService = new ManagerServiceImpl();
@@ -58,5 +59,17 @@ public class ManagerMainServlet extends BaseServlet {
 		managerService.addCourse(banjiNmae, courseName);
 		
 		resp.sendRedirect(req.getContextPath() + "/manager?method=getManagerPage");
+	}
+	private void searchByCondition(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		String studentName = req.getParameter("studentName");
+		System.out.println(studentName);
+		String banjiName = req.getParameter("banjiName");
+		String courseName = req.getParameter("courseName");
+		ManagerSearchContion managerSearchContion = new ManagerSearchContion(null,null, studentName, banjiName, courseName);
+		List<Map<String, Object>> list = managerService.searchByCondition(managerSearchContion);
+		req.setAttribute("list", list);
+		System.out.println(managerSearchContion);
+		req.setAttribute("search", managerSearchContion);
+		req.getRequestDispatcher("/WEB-INF/jsp/manager_list.jsp").forward(req, resp);
 	}
 }

@@ -7,9 +7,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript">
-			$(function() {
+			/* $(function() {
 				$("#gender option[value='${searchCondition.gender}']").prop("selected", true);
-			});
+			}); */
 			
 			function goPage(pageNo) {
 				$("#pageNo").val(pageNo);
@@ -87,7 +87,13 @@
 				<!-- 左边部分 end-->
 				<!-- 右边部分 begin-->
 				<div class="col-md-10">
-				
+					<form id="searchForm" action="${ctx }/manager?method=searchByCondition"  method="post">
+				         <input id="pageNo" type="hidden" name="pageNo"><br/>   
+                                                                  姓名：<input type="text" name="studentName" value="${search.studentName}"/>
+				       	班级：<input type="text" name="banjiName" value="${search.banjiName}"/>
+				                      课程：<input type="text" name="courseName" value="${search.courseName}"/>      
+				         <input type="submit" value="搜索"/>
+				    </form>
 					<form action="" id="mainForm" method="post">
 						<table class="table table-hover">
 					      <thead>

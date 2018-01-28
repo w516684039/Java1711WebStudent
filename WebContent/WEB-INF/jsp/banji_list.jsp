@@ -77,6 +77,7 @@
 									<th>ID</th>
 									<th>班级</th>
 									<th>删除</th>
+									<th>修改</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -85,6 +86,7 @@
 									<td>${banji.id}</td>
 									<td>${banji.name}</td>
 									<td><a href="${ctx}/banji?method=delete&id=${banji.id}">删除</a></td>
+									<td><a href="${ctx}/banji?method=toUpdate&id=${banji.id}">修改</a></td>
 								</tr>
 							    </c:forEach>
 							</tbody>

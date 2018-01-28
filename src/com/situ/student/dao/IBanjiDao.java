@@ -8,6 +8,7 @@ public interface IBanjiDao {
 	public abstract int add(String banji);
 	public abstract int delete(Integer id);
 	public abstract List<Banji> findAll();
-	
+	public abstract int update(Banji banji);
+	public abstract Banji findById(Integer id);
 
 }

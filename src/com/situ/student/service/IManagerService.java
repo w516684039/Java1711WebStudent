@@ -5,9 +5,11 @@ import java.util.Map;
 
 import com.situ.student.entity.Banji;
 import com.situ.student.entity.Course;
+import com.situ.student.vo.ManagerSearchContion;
 
 public interface IManagerService {
 	List<Map<String, Object>> findAll();
+	public List<Map<String, Object>> searchByCondition(ManagerSearchContion condition);
 
 	int addCourse(int banjiid, int courseid);
 	List<Banji> searchByBanjiName(String name);

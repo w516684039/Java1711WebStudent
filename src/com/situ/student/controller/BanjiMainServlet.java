@@ -48,6 +48,23 @@ public class BanjiMainServlet extends BaseServlet {
 	    List<Banji> list = BanjiDaoImpl.searchByCondition(banjiSearchCondition);
 	    System.out.println(list);
 		req.setAttribute("list", list);
+		req.setAttribute("searchCondition", banjiSearchCondition);
 		req.getRequestDispatcher("/WEB-INF/jsp/banji_list.jsp").forward(req, resp);
+	}
+	public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String idStr = req.getParameter("id");
+		String name = req.getParameter("name");
+		Banji banji = new Banji(Integer.parseInt(idStr),name);
+		System.out.println("00000" + banji);
+		banjiDao.update(banji);
+		resp.sendRedirect(req.getContextPath() + "/banji?method=findAllBanji");
+	}
+	public void toUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String idStr = req.getParameter("id");
+		int id = Integer.parseInt(idStr);
+		Banji banji = banjiDao.findById(id);
+		System.out.println(banji);
+		req.setAttribute("banji", banji);
+		req.getRequestDispatcher("/WEB-INF/jsp/banji_update.jsp").forward(req, resp);
 	}
 }

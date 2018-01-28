@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.concurrent.locks.Condition;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.situ.student.dao.IBanjiDao;
 import com.situ.student.entity.Banji;
+import com.situ.student.entity.Student;
 import com.situ.student.util.C3P0Util;
 import com.situ.student.util.JDBCUtil;
 import com.situ.student.vo.BnajiSearchCondition;
@@ -79,7 +82,6 @@ public class BanjiDaoImpl implements IBanjiDao {
 			for (int i = 0; i < conditionList.size(); i++) {
 				preparedStatement.setObject(i+1, conditionList.get(i));			
 			}
-			System.out.println(preparedStatement);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				int  id = resultSet.getInt("id");
@@ -97,6 +99,35 @@ public class BanjiDaoImpl implements IBanjiDao {
 		
 		
 		return list;
+	}
+
+	@Override
+	public int update(Banji banji) {
+		int count = 0;
+		try {
+			String sql = "UPDATE banji set name=? where id=?;";
+			Object[] params = {banji.getName(),banji.getId()};
+			count = queryRunner.update(sql, params);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	@Override
+	public Banji findById(Integer id) {
+		String sql =  "SELECT id,NAME "
+				+ "FROM banji where id=?;";
+		Object[] params = {id};
+		try {
+			Banji banji = queryRunner.query(sql, new BeanHandler<Banji>(Banji.class), params);
+			return banji;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	

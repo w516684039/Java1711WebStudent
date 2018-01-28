@@ -1,18 +1,14 @@
-<%@page import="com.situ.student.entity.Student"%>
-<%@page import="java.util.List"%>
+<%@page import="com.situ.student.entity.Course"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
-<%@include file="../common/base.jsp" %>
+<%@include file="../common/base.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css"/>
 	</head>
-
 	<body>
 		<nav class="navbar navbar-default">
 			<div class="container">
@@ -30,13 +26,13 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active" >
+						<li >
 							<a href="${ctx }/student?method=pageList"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;学生管理 <span class="sr-only">(current)</span></a>
 						</li>
 						<li>
 							<a href="${ctx}/banji?method=findAllBanji"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;班级管理</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="${ctx}/course?method=findAllCourse"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;&nbsp;课程管理</a>
 						</li>
 						<li>
@@ -48,7 +44,8 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出</a>
+							<a href="${ctx}/login?method=logout"><span>用户名：${user.name}</span>&nbsp&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;&nbsp;退出</a>
+						    
 						</li>
 					</ul>
 				</div>
@@ -60,36 +57,28 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="list-group">
-						<a href="${ctx}/student?method=pageList" class="list-group-item">
-							学生列表
+						<a href="#" class="list-group-item active">
+							课程列表
 						</a>
-						<a href="#" class="list-group-item">
-							学生添加
+						<a href="${ctx}/course?method=getCourseAdd" class="list-group-item">
+							课程添加
 						</a>
 					</div>
 				</div>
 
 				<div class="col-md-10">
-					<%
-		Student student = (Student)request.getAttribute("student");
+				    		   <%
+		Course course = (Course)request.getAttribute("course");
 	%>
-	<form action="<%=request.getContextPath()%>/student?method=update" method="post">
-		<input type="hidden" class="form-control" name="id" value="<%=student.getId()%>"/>
-		<label for="exampleInputEmail1">姓名</label>
-		<input type="text" class="form-control" name="name" value="<%=student.getName()%>"/><br/>
-		<label for="exampleInputEmail1">年龄</label>
-		<input type="text" class="form-control" name="age" value="<%=student.getAge()%>"/><br/>
-		<label for="exampleInputEmail1">性别</label>
-		<input type="text" class="form-control" name="gender" value="<%=student.getGender()%>"/><br/>
-		<label for="exampleInputEmail1">地址</label>
-		<input type="text" class="form-control" name="address" value="<%=student.getAddress()%>"/><br/>
+	<form action="<%=request.getContextPath()%>/course?method=update" method="post">
+		<input type="hidden" class="form-control" name="id" value="<%=course.getId()%>"/>
+		<label for="exampleInputEmail1">课程名称</label>
+		<input type="text" class="form-control" name="name" value="<%=course.getName()%>"/><br/>
+		<input type="text" class="form-control" name="credit" value="<%=course.getCredit()%>"/><br/>
 		<input type="submit" class="btn btn-info" value="修改"/>
 	</form>
-
 				</div>
 			</div>
 		</div>
-
 	</body>
-
 </html>
